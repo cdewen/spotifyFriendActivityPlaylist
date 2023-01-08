@@ -1,0 +1,29 @@
+{
+  "name": "spotifyfriendactivityplaylist",
+  "version": "1.0.0",
+  "description": "collects spotify friend's listening data throughout the day and adds the songs to a new playlist",
+  "main": "example.js",
+  "dependencies": {
+    "spotify-web-api-node": "^5.0.2",
+    "spotify-buddylist": "^1.0.0",
+    "prompt-sync": "^4.2.0",
+    "puppeteer": "^19.4.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "getSong": "node example.js",
+    "getSPDC": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cdewen/spotifyFriendActivityPlaylist.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cdewen/spotifyFriendActivityPlaylist/issues"
+  },
+  "homepage": "https://github.com/cdewen/spotifyFriendActivityPlaylist#readme"
+}
