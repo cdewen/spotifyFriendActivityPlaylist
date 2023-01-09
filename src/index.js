@@ -1,7 +1,9 @@
 const puppeteer = require('puppeteer');
 const prompt = require('prompt-sync')();
 
-(async () => {
+spdc()
+
+async function spdc()  {
   const browser = await puppeteer.launch();
   const url = 'https://open.spotify.com'
   const page = await browser.newPage();
@@ -20,14 +22,16 @@ const prompt = require('prompt-sync')();
   
   const client = await page.target().createCDPSession();
   const cookies = (await client.send('Network.getAllCookies')).cookies;
+  await browser.close()
   var str = JSON.stringify(cookies)
+  console.log(str);
 
-  var regex = /(?<="sp_dc","value":")([0-9A-Za-z_]+)/g
+
+  var regex = /(?<="sp_dc","value":")([0-9A-Za-z_-]+)/g
   var sp_dc = str.match(regex)
   sp_dc = sp_dc[0]
 
-  console.log(sp_dc)
+  console.log("\n", sp_dc);
+  return sp_dc;
     
-  await browser.close()
-
-})();
+}

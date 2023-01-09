@@ -2,7 +2,7 @@
   "name": "spotifyfriendactivityplaylist",
   "version": "1.0.0",
   "description": "collects spotify friend's listening data throughout the day and adds the songs to a new playlist",
-  "main": "example.js",
+  "main": "main.js",
   "dependencies": {
     "spotify-web-api-node": "^5.0.2",
     "spotify-buddylist": "^1.0.0",
