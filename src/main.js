@@ -5,9 +5,7 @@ const buddyList = require('spotify-buddylist')
 main()
 
 async function main() {
-    let friendData = songs()
-    var tracks = (await friendData).songs
-    var artists = (await friendData).singers
+    fetchData()
 }
 
 async function spdc()  {
@@ -40,23 +38,16 @@ async function spdc()  {
       
 }
 
-async function songs () {
+async function fetchData () {
+    
     const spDcCookie = await spdc()
-   
+
     const { accessToken } = await buddyList.getWebAccessToken(spDcCookie)
     const friendActivity = await buddyList.getFriendActivity(accessToken)
    
     const data = JSON.stringify(friendActivity)
    
-    var str = data
-    var regex = /(?<=spotify:artist:)([0-9A-Za-z]+)/g
-    var artists = str.match(regex)
-   
-    var regexTwo = /(?<=spotify:track:)([0-9A-Za-z]+)/g
-    var tracks = str.match(regexTwo)
-   
-    return {
-        singers: artists,
-        songs: tracks
-    }
+    fs.writeFile('Output.txt', data, (err) => {
+       if (err) throw err;
+    }) 
 }
