@@ -1,11 +1,21 @@
 import re
 
-def run():
-    f = open("output.txt", "r")
-    data = f.read()
+def getSongs():
+    f = open("total_songs.txt", "r")
+    Finfo = f.read()
 
-    global artists
-    artists = re.findall("(?<=spotify:artist:)([0-9A-Za-z]+)", data)
-    global songs
-    songs = re.findall("(?<=spotify:track:)([0-9A-Za-z]+)", data)
-    return songs
+    Fsongs = re.findall("[0-9A-Za-z]+", Finfo)
+    Fsongs = list(dict.fromkeys(Fsongs))
+    return Fsongs
+
+def getArtists():
+    g = open("total_artists.txt", "r")
+    Fdata = g.read()
+
+    Fartists = re.findall("[0-9A-Za-z]+", Fdata)
+    Fartists = list(dict.fromkeys(Fartists))
+    return Fartists
+
+
+
+    

@@ -1,21 +1,27 @@
 const puppeteer = require('puppeteer');
 const prompt = require('prompt-sync')();
 const buddyList = require('spotify-buddylist')
+let {PythonShell} = require('python-shell');
+const fs = require('fs');
 
 main()
 
 async function main() {
-    fetchData()
+    const spDcCookie = await spdc()
+    await continuousFetch(spDcCookie)
+    PythonShell.run('popular.py', null, function(err,results) {})
 }
 
 async function spdc()  {
-    const browser = await puppeteer.launch();
+
+    const username = prompt('what is your username? > ')
+    const password = prompt('what is your password? > ')
+
+    const browser = await puppeteer.launch({headless: false});
     const url = 'https://open.spotify.com'
     const page = await browser.newPage();
     await page.goto(url);
-  
-    const username = prompt('what is your username? > ');
-    const password = prompt('what is your password? > ')
+
   
     await page.waitForSelector('.Button-sc-qlcn5g-0.jsmWVV');
     await page.click('.Button-sc-qlcn5g-0.jsmWVV');
@@ -38,9 +44,7 @@ async function spdc()  {
       
 }
 
-async function fetchData () {
-    
-    const spDcCookie = await spdc()
+async function fetchData (spDcCookie) {
 
     const { accessToken } = await buddyList.getWebAccessToken(spDcCookie)
     const friendActivity = await buddyList.getFriendActivity(accessToken)
@@ -50,4 +54,17 @@ async function fetchData () {
     fs.writeFile('Output.txt', data, (err) => {
        if (err) throw err;
     }) 
+}
+
+async function continuousFetch (spDcCookie) {
+
+    const { accessToken } = await buddyList.getWebAccessToken(spDcCookie)
+    const friendActivity = await buddyList.getFriendActivity(accessToken)
+   
+    const data = JSON.stringify(friendActivity)
+   
+    fs.writeFile('Output.txt', data, (err) => {
+       if (err) throw err;
+    }) 
+    PythonShell.run('collectData.py', null, function(err,results) {})
 }

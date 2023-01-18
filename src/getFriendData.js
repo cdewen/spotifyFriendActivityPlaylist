@@ -20,10 +20,7 @@ const spDcCookie = 'AQA-t83zdzCIxjTmrS1BL8KLYIdXJkRcR5jsNB1P3o3E1XurfC3HT8h8A7ru
 
 fetchData()
 
-// Run every minute
-//setInterval(() => main(), 1000 * 60)
 
-//save the playlist every 24 hours
 
 
 
